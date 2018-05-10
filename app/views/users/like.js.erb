@@ -1,0 +1,9 @@
+
+<% if !@user.like_micropost?(@post) %>
+	$("#like_<%= @post.id %>").html("<%= escape_javascript(link_to 'Like', like_user_url(id: current_user,mid: @post.id), method: :post ,remote: true) %>");
+<% else %>
+	$("#like_<%= @post.id %>").html("<%= escape_javascript(link_to 'Unlike', like_user_url(id: current_user,mid: @post.id), method: :post,remote: true) %>");
+	<% end %>
+
+
+$("#likecount_<%= @post.id %>").html('  <%= @post.reload.likes_count %>');

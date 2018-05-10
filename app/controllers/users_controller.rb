@@ -66,17 +66,21 @@ class UsersController < ApplicationController
   def like
     @user=User.find(params[:id])
     @post=Micropost.find(params[:mid])
-    session[:return_to] ||= request.referer
+    
     if !@user.like_micropost?(@post)
       @user.create_action(:like, target: @post)
     else
       @user.destroy_action(:like, target: @post)
     end
-    if session[:return_to]
-    redirect_to session.delete(:return_to)
-    else
-    redirect_to @user
-    end
+     respond_to do |format|
+      format.html { session[:return_to] ||= request.referer 
+        if session[:return_to]
+          redirect_to session.delete(:return_to)
+        else
+          redirect_to @user
+        end}
+      format.js
+     end
   end
   private
 
