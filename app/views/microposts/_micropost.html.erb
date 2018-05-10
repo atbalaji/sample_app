@@ -11,5 +11,14 @@
       <%= link_to "delete", micropost, method: :delete,
                                        data: { confirm: "You sure?" } %>
     <% end %>
+
+    |
+   <% if !current_user.like_micropost?(micropost) %>
+      <%= link_to "Like", like_user_url(id: current_user,mid: micropost), method: :post %>
+     <% else %> 
+      <%= link_to "Unlike", like_user_url(id: current_user,mid: micropost), method: :post %>
+      <%end%>
+      <%= micropost.likes_count %>
+    
   </span>
-</li>
+</li> 

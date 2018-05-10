@@ -62,7 +62,22 @@ class UsersController < ApplicationController
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
   end
-
+  
+  def like
+    @user=User.find(params[:id])
+    @post=Micropost.find(params[:mid])
+    session[:return_to] ||= request.referer
+    if !@user.like_micropost?(@post)
+      @user.create_action(:like, target: @post)
+    else
+      @user.destroy_action(:like, target: @post)
+    end
+    if session[:return_to]
+    redirect_to session.delete(:return_to)
+    else
+    redirect_to @user
+    end
+  end
   private
 
     def user_params
