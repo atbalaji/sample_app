@@ -7,3 +7,5 @@
 
 
 $("#likecount_<%= @post.id %>").html('  <%= @post.reload.likes_count %>');
+
+$("#userlist_<%= @post.id %>").html('<% @post.reload.liked_by_users.each do |user| %> <%= link_to user.name, user %> <% end %>')

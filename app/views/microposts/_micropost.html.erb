@@ -22,6 +22,12 @@
     </div>
     <div id="likecount_<%= micropost.id %>">
       <%= micropost.likes_count %>
+      
+    </div>
+    <div id="userlist_<%= micropost.id %>">
+    <% micropost.liked_by_users.each do |user| %>
+        <%= link_to user.name, user %>
+      <% end %>
     </div>
   </span>
 </li> 
