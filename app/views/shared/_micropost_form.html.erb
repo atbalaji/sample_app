@@ -8,7 +8,16 @@
     <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
   </span>
 <% end %>
-
+  <hr>
+  <div class="field">
+  <h2><strong>Trending</strong></h2>
+  <ul>
+    <% ActsAsTaggableOn::Tagging.where("created_at > ?", Date.yesterday).group(:tag).count.sort{|a,b| a[1] <=> b[1] }.reverse.first(5).map {|t|  t[0]}.each do |tag| %>
+    <li><%= link_to tag,tag_url(tag.name) %></li>
+    <%end%>
+ 
+  </ul>
+   </div>
 <script type="text/javascript">
   $('#micropost_picture').bind('change', function() {
     var size_in_megabytes = this.files[0].size/1024/1024;
