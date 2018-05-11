@@ -8,6 +8,7 @@ end
 
 gem 'rails',        '5.1.4'
 gem 'bcrypt',         '3.1.11'
+gem 'acts-as-taggable-on', :git => 'https://github.com/mbleigh/acts-as-taggable-on'
 gem 'faker',          '1.7.3'
 gem 'carrierwave',             '1.2.2'
 gem 'mini_magick',             '4.7.0'
