@@ -22,8 +22,8 @@
         <%= link_to "Unlike", like_user_url(id: current_user,mid: micropost.id), method: :post,remote: true %>
       <%end%>
     </div>
-    <div id="likecount_<%= micropost.id %>">
-      <%= micropost.likes_count %>
+    <div id="likecount_<%= micropost.id %>" data-toggle="modal" data-target="#myModal_<%= micropost.id %>"  >
+      <%= link_to micropost.likes_count , "#",title: get_liked_users(micropost), 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
       
     </div>
     <div id="userlist_<%= micropost.id %>">
@@ -37,3 +37,4 @@
   </span>
 
 </li> 
+
