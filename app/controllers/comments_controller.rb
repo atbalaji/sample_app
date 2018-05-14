@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
 before_action :find_micropost, only: [:create]
 before_action :find_comment , only: [:destroy]
-
+before_action :logged_in_user, only: [:create, :destroy]
+before_action :correct_users,   only: [:destroy]
 def create
 	@comment=@micropost.comments.create(params[:comment].permit(:content))
 	@comment.user_id=current_user.id
@@ -49,4 +50,8 @@ private
 		@comment = Comment.find(params[:id])
 	end
 
+	def correct_users
+      @comment = current_user.comments.find_by(id: params[:id])
+      redirect_to root_url if @comment.nil?
+    end
 end
