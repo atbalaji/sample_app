@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update,:destroy,:following,:followers]
+  before_action :logged_in_user, only: [:index, :edit, :update,:destroy,:following,:followers,:show]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
   def index
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update_attributes(user_params)
+    if @user.update_attributes(user_update_params)
       flash[:success] = "Profile updated"
       redirect_to @user
     else
@@ -84,6 +84,10 @@ class UsersController < ApplicationController
                                    :password_confirmation)
     end
 
+    def user_update_params
+      params.require(:user).permit(:name, :password,
+                                   :password_confirmation)
+    end
     # Before filters
 
     # Confirms the correct user.

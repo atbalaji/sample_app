@@ -1,4 +1,8 @@
 	<%= form_for([micropost,micropost.comments.build],remote:true) do |f| %>
-		<%= f.text_field :content , id: "new_comment_on_#{micropost.id}" %>
-	<%= f.submit %>
+		<div class="input-group">
+		
+		<%= f.text_field :content ,class: "form-control", id: "new_comment_on_#{micropost.id}" %>
+		<span class="input-group-btn">
+		<%= f.submit 'Comment',class: "bg-primary btn "  %></span>
+	</div>
 	<% end %>
