@@ -8,8 +8,13 @@ class MicropostsController < ApplicationController
     else
     @microposts = Micropost.paginate(page: params[:page])
     end
+    @comments=Comment.where(micropost_id:@micropost).order("created_at DESC")
   end
-
+  
+  
+  
+     
+  
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save

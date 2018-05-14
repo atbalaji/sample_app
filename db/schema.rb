@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180511072729) do
+ActiveRecord::Schema.define(version: 20180514053930) do
 
   create_table "actions", force: :cascade do |t|
     t.string "action_type", null: false
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20180511072729) do
     t.datetime "updated_at", null: false
     t.index ["target_type", "target_id", "action_type"], name: "index_actions_on_target_type_and_target_id_and_action_type"
     t.index ["user_type", "user_id", "action_type"], name: "index_actions_on_user_type_and_user_id_and_action_type"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.integer "micropost_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["micropost_id"], name: "index_comments_on_micropost_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "microposts", force: :cascade do |t|

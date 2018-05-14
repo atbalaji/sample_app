@@ -6,7 +6,7 @@ class Micropost < ApplicationRecord
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
   validate  :picture_size
-
+  has_many :comments , dependent: :destroy
   def liked_by_users
     User.where(id: Action.where(target_type: "Micropost", action_type: "like", user_type: "User", target_id: self.id).pluck(:user_id))
   end
