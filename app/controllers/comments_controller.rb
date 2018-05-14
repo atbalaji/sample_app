@@ -25,8 +25,18 @@ def create
 end
 
 def destroy
+	
 	@comment.destroy
-	redirect_to user_path(current_user)
+	respond_to do |format|
+      	format.html { 
+      		session[:return_to_com_del] ||= request.referer 
+        	if session[:return_to_com_del]
+          		redirect_to session.delete(:return_to_com_del)
+        	else
+          		redirect_to @user
+        	end	}
+      	format.js
+	     	end
 end
 
 private

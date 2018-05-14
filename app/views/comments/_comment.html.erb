@@ -1,7 +1,9 @@
+<div class="comments">
 <% micropost.comments.each do |comment| %>
 	<div id="comment_<%= comment.id%>">
 	<p><%= comment.content %> </p>
 	<%= link_to "Delete" , comment, method: :delete,remote: true %>
 	</div>
 <% end %>
+</div>	
 <%= render 'comments/form',{ micropost: micropost } %>

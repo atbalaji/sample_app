@@ -1,2 +1,5 @@
-debugger;
-$("#comments_for_micropost_<%= @micropost.id %>").append("asd");
+
+
+$("#comments_for_micropost_<%= @micropost.id %>").find(" .comments").append("<div id='comment_<%= @comment.id%>'> <p> <%= @comment.content%> </p><%= j(link_to 'Delete' , @comment, method: :delete,remote: true) %></div>");
+
+$("#new_comment_on_<%=@micropost.id%>").val('')
