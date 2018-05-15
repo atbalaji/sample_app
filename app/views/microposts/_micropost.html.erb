@@ -8,6 +8,7 @@
     <%= image_tag micropost.picture.url if micropost.picture? %>
   </span>
   <span class="timestamp">  
+
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
     <% if current_user?(micropost.user) %>
       <%= link_to "delete", micropost, method: :delete,
@@ -22,19 +23,16 @@
         <%= link_to "Unlike", like_user_url(id: current_user,mid: micropost.id), method: :post,remote: true %>
       <%end%>
     </div>
-    <div id="likecount_<%= micropost.id %>" data-toggle="modal" data-target="#myModal_<%= micropost.id %>"  >
-      <%= link_to micropost.likes_count , "#",title: get_liked_users(micropost), 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
+    <div id="likecount_<%= micropost.id %>" >
+      <%= link_to micropost.likes_count , liked_users_micropost_url(id: micropost.id), remote: true ,title: get_liked_users(micropost), 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
       
     </div>
-    <div id="userlist_<%= micropost.id %>">
-    <% micropost.liked_by_users.each do |user| %>
-        <%= link_to user.name, user %>
-      <% end %>
-    </div>
+     </span>
+     <br>
     <div id="comments_for_micropost_<%= micropost.id%>">
       <%= render 'comments/comment', { micropost: micropost }%>
     </div>
-  </span>
+ 
 
 </li> 
 

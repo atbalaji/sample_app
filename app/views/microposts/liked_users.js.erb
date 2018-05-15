@@ -1,0 +1,8 @@
+	
+
+	$("#exampleModalLongContent").html('');
+  	$("#exampleModalLongContent").html('<% @micropost.reload.liked_by_users.each do |user| %> <p><%= gravatar_for user %><%= link_to user.name, user %> </p><br><br><br><br><% end %>')
+  	<%if  @micropost.reload.likes_count  >0 %>
+  	$("#exampleModalLong").modal();
+  	<%end%>
+

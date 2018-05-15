@@ -6,9 +6,8 @@ before_action :correct_users,   only: [:destroy]
 def create
 	@comment=@micropost.comments.create(params[:comment].permit(:content))
 	@comment.user_id=current_user.id
-	@comment.save
-
 	if @comment.save
+		@error="yes"
 		respond_to do |format|
       	format.html { 
       		session[:return_to_com] ||= request.referer 
@@ -21,7 +20,7 @@ def create
 	     	end
 	
 	else
-		render 'new'
+		@error="Maximum characters limit exceeded ( 140 characters)"
 	end	
 end
 

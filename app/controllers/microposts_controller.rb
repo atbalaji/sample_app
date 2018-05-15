@@ -1,6 +1,6 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
-  before_action :correct_user,   only: :destroy
+  before_action :correct_user,   only: [:destroy]
 
   def index
     if params[:tag]
@@ -11,7 +11,13 @@ class MicropostsController < ApplicationController
     @comments=Comment.where(micropost_id:@micropost).order("created_at DESC")
   end
   
-  
+  def liked_users
+    @micropost = Micropost.find(params[:id])
+    respond_to do |format|
+      format.html { }
+      format.js
+    end
+  end
   
      
   

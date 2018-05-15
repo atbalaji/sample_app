@@ -6,6 +6,5 @@
 	<% end %>
 
 
-$("#likecount_<%= @post.id %>").html('   <div id="likecount_<%= @post.id %>">   <%= link_to @post.reload.likes_count , "#",title: get_liked_users(@post), "data-toggle" => "tooltip", "data-placement" => "right" %>  </div>');
+$("#likecount_<%= @post.id %>").html("   <div id='likecount_<%= @post.id %>' >      <%= escape_javascript(link_to @post.reload.likes_count , liked_users_micropost_url(id: @post.id), remote: true ,title: get_liked_users(@post), 'data-toggle' => 'tooltip', 'data-placement' => 'right') %>          </div>");
 
-$("#userlist_<%= @post.id %>").html('<% @post.reload.liked_by_users.each do |user| %> <%= link_to user.name, user %> <% end %>')

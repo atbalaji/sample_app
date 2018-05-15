@@ -1,5 +1,6 @@
-
-
-$("#comments_for_micropost_<%= @micropost.id %>").find(" .comments").append("<div id='comment_<%= @comment.id%>'><%= j (link_to @comment.user.name,@comment.user )%> <p> <%= @comment.content%> </p><%= j(link_to 'Delete' , @comment, method: :delete,remote: true) %></div>");
-
+<% if @error=="yes" %>
+$("#comments_for_micropost_<%= @micropost.id %>").find(" .comments").append("<div id='comment_<%= @comment.id%>' class='subcomment'><%= j (link_to @comment.user.name,@comment.user )%> <p> <%= @comment.content%> </p><%= j(link_to 'Delete' , @comment, method: :delete,remote: true) %></div><hr>");
+<% else %>
+alert("Maximum characters limit exceeded ( 140 characters)")
+<% end %>
 $("#new_comment_on_<%=@micropost.id%>").val('')

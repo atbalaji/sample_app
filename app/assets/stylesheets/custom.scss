@@ -289,3 +289,23 @@ span.picture {
     border: 0;
   }
 }
+
+
+/* comments */
+
+.comments {
+ 
+  .subcomment {
+   display:block;
+   border-radius: 25px;
+   background: #efffff;
+   margin-left: 34px; 
+   padding-left: 20px; 
+   
+  }
+}
+
+.comment-form{
+  
+  margin-left:40px;
+}

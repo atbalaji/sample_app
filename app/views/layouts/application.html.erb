@@ -10,6 +10,8 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
+    <%= render 'layouts/modal' %>
+    
     <div class="container">
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
@@ -20,3 +22,9 @@
     </div>
   </body>
 </html>
+
+<% flash.each do |key, value| %>
+      <div class="<%= flash_class(key) %>">
+            <%= value %>
+      </div>
+<% end %>

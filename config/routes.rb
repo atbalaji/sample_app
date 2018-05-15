@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root                'sessions#new'
+  root                'static_pages#home'
   get    'help'    => 'static_pages#help'
   get    'about'   => 'static_pages#about'
   get    'contact' => 'static_pages#contact'
@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   end
   resources :microposts do
     resources :comments
+    member do
+      get :liked_users
+    end
   end
   resources :comments
   get 'tags/:tag', to: 'microposts#index', as: :tag

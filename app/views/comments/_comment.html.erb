@@ -1,12 +1,12 @@
 <div class="comments">
 <% micropost.comments.each do |comment| %>
-	<div id="comment_<%= comment.id%>">
+	<div id="comment_<%= comment.id%>" class="subcomment">
 	<%= link_to comment.user.name,comment.user %>
-	<p><%= comment.content %> </p>
+	<p><%= comment.content %>&nbsp;&nbsp;	 
 	<% if current_user?(comment.user) %>
 	<%= link_to "Delete" , comment, method: :delete,remote: true %>
-	<%end%>
-	</div>
+	<%end%></p>
+	</div><hr>
 <% end %>
 </div>	
 <%= render 'comments/form',{ micropost: micropost } %>
