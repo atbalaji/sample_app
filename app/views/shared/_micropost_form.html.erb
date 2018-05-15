@@ -12,8 +12,12 @@
   <div class="card">
   <h2><strong>Trending</strong></h2>
   <ul>
+  <% if ActsAsTaggableOn::Tagging.where("created_at > ?", Date.yesterday).group(:tag).count.sort{|a,b| a[1] <=> b[1] }.reverse.size ==0 %>
+      <strong>We will show you as soon as something trends</strong>
+      <% else %>
     <% ActsAsTaggableOn::Tagging.where("created_at > ?", Date.yesterday).group(:tag).count.sort{|a,b| a[1] <=> b[1] }.reverse.first(5).map {|t|  t[0]}.each do |tag| %>
     <li><%= link_to tag,tag_url(tag.name) %></li>
+    <% end %>
     <%end%>
  
   </ul>
